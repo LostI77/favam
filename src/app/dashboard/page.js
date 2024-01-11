@@ -1,8 +1,7 @@
-"use client"
-
+import API_BASE_URL from "@/libs/apibaseurl";
 async function getData() {
     try {
-        const res = await fetch('/api/users/recent-user', {
+        const res = await fetch(`${API_BASE_URL}/api/users/recent-user`, {
              method: 'GET',
              headers:{ 'Content-Type': 'application/json' },
              cache: 'no-store'
@@ -16,12 +15,12 @@ async function getData() {
     }
 }
 
-export default function DashboardPage() {
-    const dataUser = getData();
+export default async function DashboardPage() {
+    const dataUser = await getData();
     const CardContent = () => {
         return  (
             <div className="card-content">
-                { dataUser.recentUser ? (
+                { dataUser ? (
                     <>
                         <h4> Username: {dataUser.recentUser.username} </h4>
                         <p> Fullname: {dataUser.recentUser.fullName} </p>

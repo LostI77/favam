@@ -1,34 +1,46 @@
-"use client"
 import UserTable from "@/components/UserTable";
-import { Icon } from "@iconify/react";
-
+import { DashboardUserError } from "@/components/DashboardError";
+import API_BASE_URL from "@/libs/apibaseurl";
 async function getAllUsers() {
-    const res = await fetch(`/api/users`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-        cache: 'no-store'
-    });
-    if(!res.ok) {
-        throw new Error('Could not load most recent user');
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/users`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            cache: 'no-store'
+        });
+        if(!res) {
+            throw new Error('Could not load all users');
+        }
+        return res.json();
+    } catch(error) {
+        console.error("There was an error retrieving the users", error, error.message, error.code);
+        throw error;
     }
-    return res.json();
 }
 async function getAverageAge() {
-    const res = await fetch('/api/users/media-age', {
-        method: "GET",
-        headers: { 'Content-type' : 'application/json'},
-        cache: 'no-store'
-    });
-    return res.json();
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/users/media-age`, {
+            method: "GET",
+            headers: { 'Content-type' : 'application/json'},
+            cache: 'no-store'
+        });
+        if(!res.ok) {
+            throw new Error('Could not load media age user');
+        }
+        return res.json();
+    } catch(error) {
+        console.error("There is an error in loading the average age of users.", error, error.message, error.code);
+        throw error;
+    }
 }
-export default function DashboardUsersPage() {
-    const allUsers = getAllUsers();
-    const averageAge = getAverageAge();
+export default async function DashboardUsersPage() {
+    const allUsers = await getAllUsers();
+    const averageAge = await getAverageAge();
     return (
         <section className={`dashboard`}>
             <div className="dashboard-users">
                 <h1 className="dashboard-users-title">Dashboard Users</h1>
-                { allUsers.length > 0 ? (
+                { allUsers && averageAge ? (
                     <div className="dashboard-users-table-container">
                         <div className="dashboard-users-table-wrapper">
                             <UserTable data={allUsers}/>
@@ -41,16 +53,7 @@ export default function DashboardUsersPage() {
                         </section>
                     </div>
                 ) : (
-                    <div className="dashboard-users-table-container">
-                        <section className="dashboard-error-table-container">
-                            <h2 className="dashboard-error-table__title"> Error al cargar </h2>
-                            <Icon className="dashboard-error-table__icon" icon="bxs:error" />
-                            <p className="dashboard-error-table__text">
-                                No se han podido cargar los datos,
-                                intenta nuevamente o vuelve  más tarde.
-                            </p>
-                        </section>
-                    </div>
+                    <DashboardUserError />
                 ) }
             </div>
         </section>
