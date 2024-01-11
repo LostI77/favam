@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 import UserTable from "@/components/UserTable";
 async function getData(path) {
     if (path === '/dashboard') {
-        const res = await fetch('http://localhost:3000/api/users/recent-user', {
+        const res = await fetch('/api/users/recent-user', {
              method: 'GET',
              headers:{ 'Content-Type': 'application/json' },
              cache: 'no-store'
@@ -15,7 +15,7 @@ async function getData(path) {
         return res.json();
     }
     if (path === '/dashboard/users') {
-        const res = await fetch(`http://localhost:3000/api/users`, {
+        const res = await fetch(`/api/users`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             cache: 'no-store'
@@ -30,7 +30,7 @@ async function getAverageAge(path) {
     if (path !== '/dashboard/users') {
         return null;
     }
-    const res = await fetch('http://localhost:3000/api/users/media-age', {
+    const res = await fetch('/api/users/media-age', {
         method: "GET",
         headers: { 'Content-type' : 'application/json'},
         cache: 'no-store'

@@ -4,7 +4,6 @@ export default function useWindowEvents() {
     const handleResize = () => {
         const isDesktop = window.innerWidth > 1024;
         setIsDesktopNav(isDesktop);
-        console.log(isDesktop);
     };
     useEffect(() => {
         window.addEventListener('resize', handleResize);
