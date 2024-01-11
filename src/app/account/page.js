@@ -40,7 +40,7 @@ export default function Account() {
                             <div className='simple-border spacing' />
                             <p className={styles['description-text']}>Este es el texto de la descripción.</p>
                         </div>
-                        <p className={styles['date-text']}> La cuenta fue creada en: "Insert date"</p>
+                        <p className={styles['date-text']}> La cuenta fue creada en: &quot;Insert date&quot;</p>
                     </div>
                 </div>
                 <div className='simple-border spacing' />

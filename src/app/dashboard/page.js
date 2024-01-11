@@ -37,10 +37,10 @@ async function getAverageAge(path) {
     });
     return res.json();
 }
-export default async function DashboardPage() {
+export default function DashboardPage() {
     const path = usePathname();
-    const dataUser = await getData(path);
-    const dataAge = await getAverageAge(path);
+    const dataUser = getData(path);
+    const dataAge = getAverageAge(path);
     // console.log("Edad:", dataAge);
     // console.log(dataUser);
     let allUsers;
