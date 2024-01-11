@@ -4,14 +4,12 @@ import styles from './account.module.css'
 
 export default function Account() {
     const handleDeleteAccount = async () => {
-        const res = await fetch('/api/account', {
+        /*const res = await fetch('/api/account', {
             method: 'POST',
             body: JSON.stringify({ id, username }),
             headers: {"Content-Type" : "application/json"}
-        });
-        if (res.ok) {
-            signOut();
-        }
+        });*/
+        console.log("Eliminando cuenta¿")
     }
     return(
         <main className={styles["main-account"]}>
@@ -34,9 +32,9 @@ export default function Account() {
                 </div>
                 <div className={styles["account-information-container"]}>
                     <div className=''>
-                        <p className=''> Username: {'Nothing'}</p>
-                        <p className=''> Fullname: {'Nothing'} </p>
-                        <p className=''> Email: {'Nothing'} </p>
+                        <p className=''> Username: Nothing</p>
+                        <p className=''> Fullname: Nothing </p>
+                        <p className=''> Email: Nothing </p>
                         <div className={styles['description-container']}>
                             <h3 className={styles['description-title']}>Descripcion</h3>
                             <div className='simple-border spacing' />
