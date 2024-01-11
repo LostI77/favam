@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Favam
 
-## Getting Started
+Aplicacion Web, registro de usuarios y dashboard para ver los
+datos usuarios registrados con Next.js y Prisma.
 
-First, run the development server:
+- Home ✅
+- Registro ✅
+- Login ⚠️
+- Account ⚠️
+- Dashboard ✅
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Registro con prisma
+Para el registor de los usuarios en la base de datos he creado el siguiente model:
 ```
+model User {
+  id        Int @id @default(autoincrement())
+  username  String
+  fullName  String
+  email     String @unique
+  age       Int
+  password  String
+  dni       String @unique
+  birthDate DateTime
+  createAt  DateTime @default(now())
+  role      String   @default("user")
+}
+```
+En la carpeta ``/app/api/signup/`` esta el archivo que recibe la peticion POST para el registro de un nuevo usuario desde la pagina ``/app/login/``
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Inicio de seccion
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+No he logrado implementar un inicio de sección usando next-auth. Puedes revisarlo dentro de la carpeta ``/app/api``, el login iba a ser necesario para poder acceder a ``/app/account`` y poder ver tus datos.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+> Note: ``account`` funciona como un perfil de cuenta simple
 
-## Learn More
+Tambien ``/app/account/[id]`` iba a servir para poder ver otros perfiles de otros usuarios. Esto iba a funcionar con peticiones `POST` y `GET` desde ``/app/api/account`` y ``/app/api/account/[id]`` para obtener la informacion de la `session` y de otros usuarios. Sin olvidarme que ``/app/api/account`` incluye una peticion ``DElETE`` para que requiere como parametros el `id` y el `username` de lo usuario que quiera borrar su cuenta.
 
-To learn more about Next.js, take a look at the following resources:
+## Dashboard
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+El dashboard para visualizar los datos de todos los usuarios es `/dashboard/users` y `/dashboard` sirve como pagina de inicio de el dashboard.
+Dentro de `/dashboard/users` podras visualizar una tabla de todos los usuarios registrados con todos sus datos ordenados. Tambien podras ver el promedio de edad de estos, redondeado a numeros enteros.
+> Note: Solamente iban a poder ingresar al dashboard los que tuvieran `role "Admin"` y los `user` tendrian bloqueado el acceso a la visualizacion de todo lo que este dentro de la ruta `/dashboard`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+MIT
