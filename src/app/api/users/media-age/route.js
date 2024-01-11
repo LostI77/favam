@@ -4,6 +4,9 @@ import prisma from "@/libs/prisma";
 export async function GET() {
     try {
         const users = await prisma.user.findMany();
+        if (!users.ok) {
+            return new NextResponse(JSON.stringify({error: "Error getting data"}, { status: 503 }));
+        }
         const allAge = users.reduce((acc, user) => acc + user.age, 0);
         const averageAge = allAge / users.length;
         return new NextResponse(JSON.stringify({ averageAge }, { status: 200}));

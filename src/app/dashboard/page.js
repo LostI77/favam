@@ -100,7 +100,7 @@ export default function DashboardPage() {
                 path == "/dashboard/users" && (
                     <div className="dashboard-users">
                         <h1 className="dashboard-users-title">Dashboard Users</h1>
-                        { allUsers.length > 0 ? (
+                        { allUsers ? (
                             <div className="dashboard-users-table-container">
                                 <div className="dashboard-users-table-wrapper">
                                     <UserTable data={allUsers}/>
