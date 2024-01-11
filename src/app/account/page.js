@@ -9,7 +9,7 @@ export default function Account() {
             body: JSON.stringify({ id, username }),
             headers: {"Content-Type" : "application/json"}
         });*/
-        console.log("Eliminando cuenta¿")
+        console.log("Eliminando cuenta¿");
     }
     return(
         <main className={styles["main-account"]}>

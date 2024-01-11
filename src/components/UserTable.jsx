@@ -1,6 +1,6 @@
 "use client"
 export default function UserTable({data}) {
-    //console.log(`En UserTable: ${data}`);
+    const allUsers = data["users"];
     return(
         <table className="dashboard-users-table">
             <thead>
@@ -18,7 +18,7 @@ export default function UserTable({data}) {
                 </tr>
             </thead>
             <tbody>
-                { data.map((user) => (
+                { allUsers.map((user) => (
                     <tr key={`stand-user-${user.id}`}>
                         <td>{user.id}</td>
                         <td>{user.username}</td>
