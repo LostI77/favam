@@ -1,19 +1,17 @@
 "use client"
 import { Icon } from "@iconify/react";
 import { usePathname } from "next/navigation";
-import useWindowEvents from "@/hooks/useWindowEvents"
 import Link from "next/link";
 import { useState } from "react";
 import { Tektur } from 'next/font/google'
 const tektur = Tektur({ subsets: ["latin"], weight: ["600"] })
 export default function Nav() {
     const path = usePathname();
-    const { isDesktopNav } = useWindowEvents();
     const [isMenuPhoneActive, setIsMenuPhoneActive] = useState(false);
     const menuItems = [
         { name: 'Home', link: '/', rounded: false, },
-        { name: 'Login', link: '/login', rounded: true, },
-        { name: 'Signup', link: '/signup', rounded: true, },
+        { name: 'Login', link: '/auth/login', rounded: true, },
+        { name: 'Signup', link: '/auth/sign-up', rounded: true, },
         { name: 'Dashboard', link: '/dashboard', rounded: false, }
     ]
     const handlePhoneMenu = (e) => {
@@ -70,7 +68,8 @@ export default function Nav() {
         <header className={`header ${path === '/dashboard' ? 'type-dashboard' : ''}`}>
             <nav className="nav">
                 <h2 className={`nav--title ${tektur.className}`}> Favam <Icon icon="material-symbols:account-tree-outline" /> </h2>
-                { isDesktopNav ? <MenuDesktop /> : <MenuPhone /> }
+                <MenuDesktop />
+                <MenuPhone />
             </nav>
         </header>
     )
