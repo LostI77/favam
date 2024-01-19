@@ -1,9 +1,8 @@
 import UserTable from "@/components/UserTable";
 import { DashboardUserError } from "@/components/DashboardError";
-import API_BASE_URL from "@/libs/apibaseurl";
 async function getAllUsers() {
     try {
-        const res = await fetch(`${API_BASE_URL}/api/users`, {
+        const res = await fetch('/api/users', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
             cache: 'no-store'
@@ -19,7 +18,7 @@ async function getAllUsers() {
 }
 async function getAverageAge() {
     try {
-        const res = await fetch(`${API_BASE_URL}/api/users/media-age`, {
+        const res = await fetch('/api/users/media-age', {
             method: "GET",
             headers: { 'Content-type' : 'application/json'},
             cache: 'no-store'

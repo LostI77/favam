@@ -1,7 +1,6 @@
-import API_BASE_URL from "@/libs/apibaseurl";
 async function getData() {
     try {
-        const res = await fetch(`${API_BASE_URL}/api/users/recent-user`, {
+        const res = await fetch('/api/users/recent-user', {
              method: 'GET',
              headers:{ 'Content-Type': 'application/json' },
              cache: 'no-store'
