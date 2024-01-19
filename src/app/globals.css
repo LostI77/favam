@@ -12,13 +12,6 @@
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
     'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 }
-/*
-@media (prefers-color-scheme: dark) {
-  :root {
-
-  }
-}
-*/
 html {
   scroll-behavior: smooth;
 }
@@ -56,6 +49,7 @@ td {
 .text-red {
   color: var(--primary-red-color);
 }
+
 .header {
   width: 100%;
   height: 85px;
@@ -402,6 +396,15 @@ td {
   :root {
     --max-width: 240px;
   }
+  .menu-desktop {
+    display: none;
+  }
+  .menu-phone {
+    display: flex;
+  }
+  .menu-phone__button {
+    display: block;
+  }
   .form-container {
     width: 220px;
     margin: 5em auto;
@@ -610,6 +613,12 @@ td {
 @media screen and (min-width: 1024px) {
   :root {
     --max-width: 1024px;
+  }
+  .menu-phone__button, .menu-phone {
+    display: none;
+  }
+  .menu-desktop {
+    display: inline-flex;
   }
   .dashboard-wrapper {
     flex-flow: row nowrap;
